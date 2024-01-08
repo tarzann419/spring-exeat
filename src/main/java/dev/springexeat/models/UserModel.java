@@ -12,7 +12,7 @@ public class UserModel {
     private String first_name;
     private String last_name;
     private String mat_no;
-    @Column(name="email",unique=true,nullable = false)
+    @Column(name="email", unique=true, nullable = false)
     private String email;
     private String role;
     private String password;

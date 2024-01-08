@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/fragments :: head}"></head>
+
+<body>
+<h1>
+    Student Registrstion Form
+</h1>
+
+<!--send a flash message-->
+<div th:if="${message}" th:class="'alert alert-' + ${color} + ' text-center'">
+    [[${message}]]
+</div>
+
+<!-- add drink Form -->
+<form th:action="@{/saveUser}" th:method="post" th:object="${user}" class="container mt-3">
+
+    <div class="border p-3">
+
+        <div class="form-group row">
+            <label th:for="first_name" class="col-sm-4 col-form-label required">First Name</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input type="text" name="first_name" placeholder="Enter your First Name" th:field="*{first_name}" class="form-control" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">First Name</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label th:for="last_name" class="col-sm-4 col-form-label required">Last Name</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input type="text" name="last_name" placeholder="Enter your Last Name" th:field="*{last_name}" class="form-control" required>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Last Name</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label th:for="mat_no" class="col-sm-4 col-form-label required">Matric. No.</label>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <span class="input-group-text">BHU/</span>
+                    </div>
+                    <input type="text" name="last_name" placeholder="e.g 21/04/05/0079" th:field="*{mat_no}" class="form-control" required>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label th:for="email" class="col-sm-4 col-form-label required">Email</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input type="email" name="email" placeholder="Enter your Bingham Email" th:field="*{email}" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label th:for="password" class="col-sm-4 col-form-label required">Password</label>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <input type="password" name="password" th:field="*{password}" class="form-control" required>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
+            <button type="button" class="btn btn-secondary m-2" th:onclick="cancelForm()">Cancel</button>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    function cancelForm() {
+        window.location = "[[@{/register}]]";
+    }
+</script>
+
+</body>
+</html>
