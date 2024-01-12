@@ -1,5 +1,6 @@
 package dev.springexeat.configuration;
 
+import dev.springexeat.service.CustomSuccessHandler;
 import dev.springexeat.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
 
     @Autowired
     CustomUserDetailsService customUserDetailsService;
@@ -30,12 +33,12 @@ public class SecurityConfig {
         http.csrf(c -> c.disable())
 
                 .authorizeHttpRequests(request -> request.requestMatchers("/admin-page")
-                        .permitAll().requestMatchers("/user-page").permitAll()
+                        .hasAuthority("admin").requestMatchers("/user-page").hasAuthority("student")
                         .requestMatchers("/register", "/css/**").permitAll()
                         .anyRequest().authenticated())
 
                 .formLogin(form -> form.loginPage("/login").loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/").permitAll())
+                        .successHandler(customSuccessHandler).permitAll())
 //                        .successHandler(customSuccessHandler).permitAll())
 
                 .logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
