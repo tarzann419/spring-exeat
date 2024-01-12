@@ -6,6 +6,7 @@ import dev.springexeat.models.UserModel;
 import dev.springexeat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +24,16 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute ("user") UserDto user, RedirectAttributes redirectAttributes){
+    @PostMapping("/register")
+    public String saveUser(@ModelAttribute ("user") UserDto user, Model model){
         userService.saveUser(user);
-        redirectAttributes.addFlashAttribute("message", "Registration Successful");
-        redirectAttributes.addFlashAttribute("color", "success");
-        return "register";
+        model.addAttribute("message", "Registered Successfuly!");
+        model.addAttribute("color", "success");
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
     }
 }

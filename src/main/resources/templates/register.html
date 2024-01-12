@@ -5,16 +5,16 @@
 
 <body>
 <h1>
-    Student Registrstion Form
+    Student Registration Form
 </h1>
 
 <!--send a flash message-->
-<div th:if="${message}" th:class="'alert alert-' + ${color} + ' text-center'">
+<div th:if="${message != null}" th:class="'alert alert-' + ${color} + ' text-center'">
     [[${message}]]
 </div>
 
 <!-- add drink Form -->
-<form th:action="@{/saveUser}" th:method="post" th:object="${user}" class="container mt-3">
+<form th:action="@{/register}" th:method="post" th:object="${user}" class="container mt-3">
 
     <div class="border p-3">
 

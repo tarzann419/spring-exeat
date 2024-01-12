@@ -11,7 +11,6 @@ public class UserDto {
     private String password;
 
     public UserDto(String first_name, String last_name, String mat_no, String email, String role, String password) {
-        super();
         this.first_name = first_name;
         this.last_name = last_name;
         this.mat_no = mat_no;
