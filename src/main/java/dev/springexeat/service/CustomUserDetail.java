@@ -30,6 +30,10 @@ public class CustomUserDetail implements UserDetails {
         return user.getFirst_name() + " " + user.getLast_name();
     }
 
+    public String getMatNo() {
+        return user.getMat_no();
+    }
+
     @Override
     public String getUsername() {
         return user.getEmail();

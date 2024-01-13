@@ -1,0 +1,26 @@
+<nav th:fragment="sidebar" id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+    <div class="position-sticky">
+        <ul class="nav flex-column">
+            <!-- Nav links in the sidebar -->
+            <li class="nav-item">
+                <a class="nav-link active" th:href="@{/student-page}">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/student/new-application}">
+                    <i class="fas fa-chart-bar"></i> Apply for Exeat
+                </a>
+            </li>
+            <!-- Add more items as needed -->
+
+            <!-- Example of a separator line -->
+            <hr class="dropdown-divider">
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">-->
+<!--                    <i class="fas fa-cog"></i> Settings-->
+<!--                </a>-->
+<!--            </li>-->
+        </ul>
+    </div>
+</nav>

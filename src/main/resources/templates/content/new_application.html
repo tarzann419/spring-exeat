@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container-fluid {
+      padding-top: 20px;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section h3 {
+      color: #007bff;
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3; /* Darker blue color on hover */
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+<div th:include="fragments/header :: header"></div>
+
+
+
+
+<!-- Sidebar -->
+<div class="container-fluid">
+  <div class="row">
+    <div th:replace="fragments/sidebar :: sidebar"></div>
+    <!-- Content Section -->
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="form-container">
+        <div class="form-section">
+          <h3>Apply for Exeat</h3>
+          <form th:action="@{/student/save-application}" th:method="post" th:object="${student}">
+        <!-- Guardian Information Section -->
+        <div class="mb-3">
+          <h3>Guardian Information</h3>
+
+          <!-- Guardian's Full Name -->
+          <label for="guardianFullName" class="form-label">Guardian's Full Name</label>
+          <input type="text" class="form-control" th:field="*{guardianFullName}" id="guardianFullName" placeholder="e.g John Doe" required>
+
+          <small class="text-danger" th:if="${#fields.hasErrors('guardianFullName')}" th:errors="*{guardianFullName}"></small>
+
+        </div>
+
+        <!-- Guardian's Phone Number -->
+        <div class="mb-3">
+          <label for="guardianPhoneNumber" class="form-label">Guardian's Phone Number</label>
+          <input type="tel" class="form-control" th:field="*{guardianPhoneNumber}" id="guardianPhoneNumber" placeholder="e.g (555) 555-5555" required>
+
+          <small class="text-danger" th:if="${#fields.hasErrors('guardianPhoneNumber')}" th:errors="*{guardianPhoneNumber}"></small>
+        </div>
+
+        <!-- Guardian's Address -->
+        <div class="mb-3">
+          <label for="guardianAddress" class="form-label">Guardian's Address</label>
+          <textarea class="form-control" th:field="*{guardianAddress}" id="guardianAddress" rows="3" placeholder="e.g 123 Main St, City, Country" required></textarea>
+
+          <small class="text-danger" th:if="${#fields.hasErrors('guardianAddress')}" th:errors="*{guardianAddress}"></small>
+        </div>
+
+        <!-- Leave Information Section -->
+        <div class="mb-3">
+          <h3>Exeat Information</h3>
+
+          <!-- Destination -->
+          <div class="mb-3">
+            <label for="destination" class="form-label">Destination</label>
+            <input type="text" class="form-control" th:field="*{destination}" id="destination" placeholder="e.g Vacation Spot" required>
+
+            <small class="text-danger" th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}"></small>
+          </div>
+
+          <!-- Leave Date and Time -->
+          <div class="mb-3 row">
+            <div class="col-sm-6">
+              <label for="leaveDate" class="form-label">Leave Date</label>
+              <input type="date" class="form-control" th:field="*{leaveDate}" id="leaveDate" required>
+
+              <small class="text-danger" th:if="${#fields.hasErrors('leaveDate')}" th:errors="*{leaveDate}"></small>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="leaveTime" class="form-label">Leave Time</label>
+              <input type="time" class="form-control" th:field="*{leaveTime}" id="leaveTime" required>
+
+              <small class="text-danger" th:if="${#fields.hasErrors('leaveTime')}" th:errors="*{leaveTime}"></small>
+            </div>
+          </div>
+
+          <!-- Return Date and Time -->
+          <div class="mb-3 row">
+            <div class="col-sm-6">
+              <label for="returnDate" class="form-label">Return Date</label>
+              <input type="date" class="form-control" th:field="*{returnDate}" id="returnDate" required>
+
+              <small class="text-danger" th:if="${#fields.hasErrors('returnDate')}" th:errors="*{returnDate}"></small>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="returnTime" class="form-label">Return Time</label>
+              <input type="time" class="form-control" th:field="*{returnTime}" id="returnTime" required>
+
+              <small class="text-danger" th:if="${#fields.hasErrors('returnTime')}" th:errors="*{returnTime}"></small>
+            </div>
+          </div>
+
+          <input type="hidden" th:field="*{matNo}" th:value="${user.matNo}">
+
+          <!-- Reason for Leaving -->
+          <div class="mb-3">
+            <label for="reasonForLeaving" class="form-label">Reason for Leaving</label>
+            <textarea class="form-control" id="reasonForLeaving" th:field="*{reasonForLeaving}" rows="3" placeholder="Specify the reason for leaving" required></textarea>
+
+            <small class="text-danger" th:if="${#fields.hasErrors('reasonForLeaving')}" th:errors="*{reasonForLeaving}"></small>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div th:insert="fragments/footer :: footer"></div>
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

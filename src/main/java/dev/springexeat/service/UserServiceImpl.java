@@ -15,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+//    for user registration
     @Override
     public UserModel saveUser(UserDto userDto) {
         UserModel user = new UserModel(
