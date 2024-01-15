@@ -1,6 +1,7 @@
 package dev.springexeat.service;
 
 import dev.springexeat.dto.UserDto;
+import dev.springexeat.models.StudentModel;
 import dev.springexeat.models.UserModel;
 import dev.springexeat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,20 @@ public class UserServiceImpl implements UserService {
                 userDto.getRole(),
                 passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserModel getApplicationById(long id) {
+        return null;
+    }
+
+    @Override
+    public StudentModel saveApplication(StudentModel student) {
+        return null;
+    }
+
+    @Override
+    public StudentModel updateApplicationById(StudentModel student) {
+        return null;
     }
 }
